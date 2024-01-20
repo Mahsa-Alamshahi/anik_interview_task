@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -42,6 +41,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -74,7 +74,8 @@ fun PhoneNumberScreen(
     var imageSize by remember { mutableStateOf(IntSize.Zero) }
     var isError by rememberSaveable { mutableStateOf(false) }
 
-
+val configuration = LocalConfiguration.current
+    val widthInDp = configuration.screenWidthDp.dp
 
     fun validatePhoneNumber(text: String) {
         isError = text.length < PHONE_NUMBER_TEXT_LENGTH
@@ -144,9 +145,9 @@ fun PhoneNumberScreen(
                     Image(
                         painter = painterResource(id = R.drawable.header_bg),
                         modifier = Modifier
-                            .wrapContentHeight()
+                            .width(widthInDp/3)
                             .clip(RoundedCornerShape(12.dp)),
-                        contentDescription = "Main Background",
+                        contentDescription = "Header Image",
                     )
 
                 }

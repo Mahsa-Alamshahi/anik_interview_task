@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -36,6 +35,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -71,13 +71,15 @@ fun VerificationCodeScreen(
 ) {
 
 
-    var sizeImage by remember { mutableStateOf(IntSize.Zero) }
+    var imageSize by remember { mutableStateOf(IntSize.Zero) }
+    val configuration = LocalConfiguration.current
+    val widthInDp = configuration.screenWidthDp.dp
 
 
     val gradient = Brush.verticalGradient(
         colors = listOf(Color.Transparent, Color.Black),
-        startY = sizeImage.height.toFloat() / 3,
-        endY = sizeImage.height.toFloat()
+        startY = imageSize.height.toFloat() / 3,
+        endY = imageSize.height.toFloat()
     )
 
 
@@ -98,7 +100,7 @@ fun VerificationCodeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .onGloballyPositioned {
-                    sizeImage = it.size
+                    imageSize = it.size
                 },
             contentScale = ContentScale.FillBounds,
             contentDescription = "Main Background"
@@ -156,7 +158,7 @@ fun VerificationCodeScreen(
                         Image(
                             painter = painterResource(id = R.drawable.header_bg),
                             modifier = Modifier
-                                .wrapContentHeight()
+                                .width(widthInDp/3)
                                 .clip(RoundedCornerShape(12.dp)),
                             contentDescription = "Main Background",
                         )
