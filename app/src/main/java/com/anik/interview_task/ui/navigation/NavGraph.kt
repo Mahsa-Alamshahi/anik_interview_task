@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.anik.interview_task.ui.register.PhoneNumberScreenRoute
+import com.anik.interview_task.ui.register.VerificationCodeScreenRoute
 
 @Composable
 fun NavGraph() {
@@ -16,8 +17,8 @@ fun NavGraph() {
     val navController = rememberNavController()
 
     NavHost(navController, startDestination = Screen.PhoneNumber.route) {
-
         phoneNumberRoute(navController)
+        verificationCodeRoute(navController)
     }
 }
 
@@ -39,7 +40,35 @@ fun NavGraphBuilder.phoneNumberRoute(navController: NavController) {
         },
     ) {
 
-        PhoneNumberScreenRoute()
+        PhoneNumberScreenRoute() {
+            navController.navigate(Screen.VerificationCode.route)
+        }
     }
 }
+
+
+fun NavGraphBuilder.verificationCodeRoute(navController: NavController) {
+    composable(
+        route = Screen.VerificationCode.route,
+        enterTransition = {
+            slideIntoContainer(
+                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
+                animationSpec = tween(700)
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
+                animationSpec = tween(700)
+            )
+        },
+    ) {
+
+        VerificationCodeScreenRoute(){
+            navController.popBackStack()
+        }
+
+    }
+}
+
 

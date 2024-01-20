@@ -102,7 +102,7 @@ dependencies {
     // Moshi
     implementation("com.squareup.moshi:moshi:1.14.0")
 
-
+implementation("com.orhanobut:logger:2.2.0")
     implementation("com.google.accompanist:accompanist-permissions:0.33.2-alpha")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
 }
