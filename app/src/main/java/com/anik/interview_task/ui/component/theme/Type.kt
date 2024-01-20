@@ -1,4 +1,4 @@
-package com.anik.interview_task.ui.theme
+package com.anik.interview_task.ui.component.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
